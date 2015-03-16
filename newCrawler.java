@@ -1,5 +1,7 @@
+
 import java.io.*;
 import java.net.*;
+import java.rmi.server.ExportException;
 import java.util.regex.*;
 import java.sql.*;
 import java.util.*;
@@ -26,7 +28,7 @@ public class newCrawler {
     public Properties props;
     ArrayList<String> queue = new ArrayList<String>();
     ArrayList<String> linkzGotten = new ArrayList<String>();
-    ArrayList<String> addedToDB = new ArrayList<String>();
+    ArrayList<String> addedToDB = new ArrayList<String>(); //should be hashset
 
     newCrawler() {
         urlID = 0;
@@ -68,9 +70,7 @@ public class newCrawler {
         try {
             // stat.executeUpdate("DROP TABLE URLS");
             // stat.executeUpdate("DROP TABLE WORDS");
-        }
-        catch (Exception e) {
-        }
+        } catch (Exception e) { e.printStackTrace(); }
         
         // Create the table
         // stat.executeUpdate("CREATE TABLE URLS (urlid INT, url VARCHAR(255), description VARCHAR(3000), UNIQUE(url))");
@@ -135,12 +135,9 @@ public class newCrawler {
             if (check != 0) {
                 canTrip = true;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NullPointerException n) {
-            n.printStackTrace();
-        }
-        // }
+        } catch (SQLException e) { e.printStackTrace();
+        } catch (NullPointerException n) { n.printStackTrace(); }
+
     }
 
     public void insertWORDInDB(String word) throws SQLException, IOException {
@@ -174,9 +171,7 @@ public class newCrawler {
                 }                    
                 // }
                     lawl++;
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
+            } catch(Exception e) { e.printStackTrace(); }
         }
     }
 
@@ -255,9 +250,8 @@ public class newCrawler {
                 return true;
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
+
         return false;
     }
     void addToQueue(Elements links) {
@@ -393,16 +387,14 @@ public class newCrawler {
 
     private static void WriteQueue(ArrayList<String> queue) {  
         try {  
-            FileOutputStream fos = new FileOutputStream ("keep.dat");  
-            ObjectOutputStream oos = new ObjectOutputStream(fos);  
+            FileOutputStream fos = new FileOutputStream ("keep.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
             
             oos.writeObject(queue);  
 
             fos.close();  
 
-        } catch (Exception e) {  
-            System.out.println(e);     
-        }  
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
      private static void WriteLinkzGotten(ArrayList<String> linkzGotten) {  
@@ -435,11 +427,11 @@ public class newCrawler {
         ArrayList<String> queue = new ArrayList<String>();  
         try {  
             FileInputStream fis = new  FileInputStream("keep.dat");  
-            ObjectInputStream ois = new ObjectInputStream(fis);  
+            ObjectInputStream ois = new ObjectInputStream(fis);
             Object obj = ois.readObject();  
             queue = (ArrayList<String>) obj;  
         } catch (Exception e) {  
-            System.out.println(e);  
+            e.printStackTrace();
         }   
 
         return queue;  
@@ -452,9 +444,7 @@ public class newCrawler {
             ObjectInputStream ois = new ObjectInputStream(fis);  
             Object obj = ois.readObject();  
             linkzGotten = (ArrayList<String>) obj;  
-        } catch (Exception e) {  
-            System.out.println(e);  
-        }   
+        } catch (Exception e) { e.printStackTrace(); }
         
         return linkzGotten;  
     }
@@ -465,10 +455,8 @@ public class newCrawler {
             FileInputStream fis = new  FileInputStream("keep3.dat");  
             ObjectInputStream ois = new ObjectInputStream(fis);  
             Object obj = ois.readObject();  
-            addedToDB = (ArrayList<String>) obj;  
-        } catch (Exception e) {  
-            System.out.println(e);  
-        }   
+            addedToDB = (ArrayList<String>) obj;
+        } catch (Exception e) { e.printStackTrace(); }
         
         return addedToDB;  
     }
@@ -539,9 +527,6 @@ public class newCrawler {
             // // doc = Jsoup.parse(html, "UTF-8");
             // crawler.getLinks(doc);
             
-        } catch(Exception e) {
-
-            e.printStackTrace();
-        } 
+        } catch(Exception e) { e.printStackTrace(); }
     }
 }
