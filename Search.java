@@ -49,13 +49,13 @@ public class Search {
         catch (Exception e) {
         }
         if (arr[1] == null) {
-         ResultSet result = stat.executeUpdate("SELECT * FROM crawler WHERE (word LIKE '"+arr[0]+"') or word LIKE GROUP BY urldid HAVING COUNT(urlid)>1");
+         ResultSet result = stat.executeQuery("SELECT * FROM crawler WHERE (word LIKE '" + arr[0] + "') or word LIKE GROUP BY urldid HAVING COUNT(urlid)>1");
      
          if (result.next()) {
           System.out.println("URL  already in DB");
          }
         } else if (arr[1] != null) {
-         ResultSet result = stat.executeUpdate("SELECT * FROM crawler WHERE (word LIKE '"+arr[0]+"') or (word LIKE '"+arr[1]+"') GROUP BY urldid HAVING COUNT(urlid)>1");
+         ResultSet result = stat.executeQuery("SELECT * FROM crawler WHERE (word LIKE '"+arr[0]+"') or (word LIKE '"+arr[1]+"') GROUP BY urldid HAVING COUNT(urlid)>1");
         }
     }
 }

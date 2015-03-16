@@ -15,7 +15,7 @@ public class Crawler {
     int urlID;
     int occurence;
     public Properties props;
-    Queue<String> queue = new Queue<String>();
+    ArrayList<String> queue = new ArrayList<String>();
 
     Crawler() {
         urlID = 0;

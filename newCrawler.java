@@ -24,9 +24,9 @@ public class newCrawler {
     String url = null;
     
     public Properties props;
-    LinkedList<String> queue = new LinkedList<String>();
-    LinkedList<String> linkzGotten = new LinkedList<String>();
-    LinkedList<String> addedToDB = new LinkedList<String>();
+    ArrayList<String> queue = new ArrayList<String>();
+    ArrayList<String> linkzGotten = new ArrayList<String>();
+    ArrayList<String> addedToDB = new ArrayList<String>();
 
     newCrawler() {
         urlID = 0;
@@ -355,16 +355,16 @@ public class newCrawler {
 
                 if (queue.isEmpty())
                     break;
-                url = queue.getFirst();
-                queue.removeFirst();
+                url = queue.get(0);
+                queue.remove(0);
                 
             } catch(Exception e) {
                 
                 while (createDoc(url) == null) {
                     if (queue.isEmpty())
                         break;
-                    url = queue.getFirst();
-                    queue.removeFirst();
+                    url = queue.get(0);
+                    queue.remove(0);
                 }
 
                 System.out.printf("%s failed\n", url);
@@ -391,7 +391,7 @@ public class newCrawler {
         }
     }
 
-    private static void WriteQueue(LinkedList<String> queue) {  
+    private static void WriteQueue(ArrayList<String> queue) {  
         try {  
             FileOutputStream fos = new FileOutputStream ("keep.dat");  
             ObjectOutputStream oos = new ObjectOutputStream(fos);  
@@ -405,7 +405,7 @@ public class newCrawler {
         }  
     }
 
-     private static void WriteLinkzGotten(LinkedList<String> linkzGotten) {  
+     private static void WriteLinkzGotten(ArrayList<String> linkzGotten) {  
         try {  
             FileOutputStream fos2 = new FileOutputStream ("keep2.dat");  
             ObjectOutputStream oos2 = new ObjectOutputStream(fos2);  
@@ -418,7 +418,7 @@ public class newCrawler {
         }  
     }
 
-     private static void WriteAddedToDB(LinkedList<String> addedToDB) {  
+     private static void WriteAddedToDB(ArrayList<String> addedToDB) {  
         try {  
             FileOutputStream fos3 = new FileOutputStream ("keep3.dat");  
             ObjectOutputStream oos3 = new ObjectOutputStream(fos3);  
@@ -431,13 +431,13 @@ public class newCrawler {
         }  
     }
 
-    private static LinkedList<String> ReadQueue(){  
-        LinkedList<String> queue = new LinkedList<String>();  
+    private static ArrayList<String> ReadQueue(){  
+        ArrayList<String> queue = new ArrayList<String>();  
         try {  
             FileInputStream fis = new  FileInputStream("keep.dat");  
             ObjectInputStream ois = new ObjectInputStream(fis);  
             Object obj = ois.readObject();  
-            queue = (LinkedList<String>) obj;  
+            queue = (ArrayList<String>) obj;  
         } catch (Exception e) {  
             System.out.println(e);  
         }   
@@ -445,13 +445,13 @@ public class newCrawler {
         return queue;  
     }
     
-    private static LinkedList<String> ReadLinkzGotten(){  
-        LinkedList<String> linkzGotten = new LinkedList<String>();  
+    private static ArrayList<String> ReadLinkzGotten(){  
+        ArrayList<String> linkzGotten = new ArrayList<String>();  
         try {  
             FileInputStream fis = new  FileInputStream("keep2.dat");  
             ObjectInputStream ois = new ObjectInputStream(fis);  
             Object obj = ois.readObject();  
-            linkzGotten = (LinkedList<String>) obj;  
+            linkzGotten = (ArrayList<String>) obj;  
         } catch (Exception e) {  
             System.out.println(e);  
         }   
@@ -459,13 +459,13 @@ public class newCrawler {
         return linkzGotten;  
     }
 
-    private static LinkedList<String> ReadAdded(){  
-        LinkedList<String> addedToDB = new LinkedList<String>();  
+    private static ArrayList<String> ReadAdded(){  
+        ArrayList<String> addedToDB = new ArrayList<String>();  
         try {  
             FileInputStream fis = new  FileInputStream("keep3.dat");  
             ObjectInputStream ois = new ObjectInputStream(fis);  
             Object obj = ois.readObject();  
-            addedToDB = (LinkedList<String>) obj;  
+            addedToDB = (ArrayList<String>) obj;  
         } catch (Exception e) {  
             System.out.println(e);  
         }   
