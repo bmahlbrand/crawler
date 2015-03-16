@@ -214,38 +214,38 @@ public class newCrawler {
     }
     
     boolean addable(Element link)  {
-        String check = link.absUrl("href");
+        String check = link.absUrl("href").toLowerCase();
 
         try {  
-            if(link.absUrl("href") != null 
-                && link.absUrl("href").contains(tehContainer)
+            if(check != null
+                && check.contains(tehContainer)
                 && !link.ownText().isEmpty()
-                && (!link.absUrl("href").toLowerCase().endsWith(".pdf") && !link.absUrl("href").toLowerCase().endsWith(".pdf/"))
-                && (!link.absUrl("href").endsWith(".png") && !link.absUrl("href").endsWith(".png/"))
-                && (!link.absUrl("href").endsWith(".jpg") && !link.absUrl("href").endsWith(".jpg/"))
-                && (!link.absUrl("href").endsWith(".gif") && !link.absUrl("href").endsWith(".gif/"))
-                && (!link.absUrl("href").endsWith(".h") && !link.absUrl("href").endsWith(".h/"))
-                && (!link.absUrl("href").endsWith(".c") && !link.absUrl("href").endsWith(".c/"))
-                && (!link.absUrl("href").endsWith(".m") && !link.absUrl("href").endsWith(".m/"))
-                && (!link.absUrl("href").endsWith(".java") && !link.absUrl("href").endsWith(".java/"))
-                && (!link.absUrl("href").endsWith(".pps") && !link.absUrl("href").endsWith(".pps/"))
-                && (!link.absUrl("href").endsWith(".mpg") && !link.absUrl("href").endsWith(".mpg/"))
-                && (!link.absUrl("href").endsWith(".wmv") && !link.absUrl("href").endsWith(".wmv/"))
-                && (!link.absUrl("href").endsWith(".mp3") && !link.absUrl("href").endsWith(".mp3/"))
-                && !link.absUrl("href").contains("ftp:")
-                && !link.absUrl("href").contains("#") 
-                && !link.absUrl("href").contains("?") 
-                && !link.absUrl("href").contains("=") 
-                && !link.absUrl("href").endsWith(".php")
-                && !link.absUrl("href").contains(".asp")
-                && !link.absUrl("href").contains("mailto:")
-                && !link.absUrl("href").contains(".shtml")
+                && (!check.endsWith(".pdf") && !check.endsWith(".pdf/"))
+                && (!check.endsWith(".png") && !check.endsWith(".png/"))
+                && (!check.endsWith(".jpg") && !link.absUrl("href").endsWith(".jpg/"))
+                && (!check.endsWith(".gif") && !link.absUrl("href").endsWith(".gif/"))
+                && (!check.endsWith(".h") && !link.absUrl("href").endsWith(".h/"))
+                && (!check.endsWith(".c") && !link.absUrl("href").endsWith(".c/"))
+                && (!check.endsWith(".m") && !link.absUrl("href").endsWith(".m/"))
+                && (!check.endsWith(".java") && !link.absUrl("href").endsWith(".java/"))
+                && (!check.endsWith(".pps") && !link.absUrl("href").endsWith(".pps/"))
+                && (!check.endsWith(".mpg") && !link.absUrl("href").endsWith(".mpg/"))
+                && (!check.endsWith(".wmv") && !link.absUrl("href").endsWith(".wmv/"))
+                && (!check.endsWith(".mp3") && !link.absUrl("href").endsWith(".mp3/"))
+                && !check.contains("ftp:")
+                && !check.contains("#")
+                && !check.contains("?")
+                && !check.contains("=")
+                && !check.endsWith(".php")
+                && !check.contains(".asp")
+                && !check.contains("mailto:")
+                && !check.contains(".shtml")
                 // && link.absUrl("href").endsWith(".html")
 
-                && !urlInDB(link.absUrl("href"))
+                && !urlInDB(check)
                 // && !linkzGotten.contains(link.absUrl("href"))
                 // && (createDoc(link.absUrl("href")).select("body").text() != null)
-                && !queue.contains(link.absUrl("href"))) {
+                && !queue.contains(check)) {
 
                 return true;
             }
